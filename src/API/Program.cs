@@ -1,17 +1,31 @@
 using System.Text;
 using System.Text.Json;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Chat bot API",
+        Description = "A ASP.NET Core 8 minimal API to generate messages for a chat bot using PaLM 2 API",
+        Contact = new OpenApiContact
+        {
+            Name = "Website",
+            Url = new Uri("https://riannegreiros.dev"),
+        },
+    });
+});
 
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "AllowLocalClient", policy =>
-    policy.WithOrigins("http://localhost:3000")
+    policy.WithOrigins(builder.Configuration["Client_Url"] ?? "http://localhost:3000")
     .AllowAnyHeader()
     .WithMethods("GET"));
 });
@@ -22,7 +36,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API for a Chat Bot");
+    });
 }
 
 app.UseHttpsRedirection();
@@ -47,7 +64,18 @@ app.MapGet("/prompt/{text}", async (string text, HttpContext httpContext) =>
     Console.WriteLine(data);
     await httpContext.Response.WriteAsync(data);
 })
-.WithOpenApi();
+.WithName("Generate Language Model Response")
+.WithSummary("Return a Language Model Response")
+.WithDescription("Return a Language Model Response from PaLM 2 API")
+.WithOpenApi(generatedOperation =>
+{
+    var parameter = generatedOperation.Parameters[0];
+    parameter.Description = "The text to be processed by the language model";
+    return generatedOperation;
+})
+.Produces(StatusCodes.Status200OK)
+.Produces(StatusCodes.Status400BadRequest)
+.Produces(StatusCodes.Status500InternalServerError);
 
 app.UseCors("AllowLocalClient");
 
