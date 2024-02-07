@@ -4,5 +4,7 @@
       "Default": "Information",
       "Microsoft.AspNetCore": "Warning"
     }
-  }
+  },
+  "LANGUAGE_MODEL_API_KEY": "",
+  "AllowedHosts": "*"
 }
