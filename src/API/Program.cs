@@ -8,6 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "AllowLocalClient", policy =>
+    policy.WithOrigins("http://localhost:3000")
+    .AllowAnyHeader()
+    .WithMethods("GET"));
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -38,6 +46,9 @@ app.MapGet("/prompt/{text}", async (string text, HttpContext httpContext) =>
 
     Console.WriteLine(data);
     await httpContext.Response.WriteAsync(data);
-});
+})
+.WithOpenApi();
+
+app.UseCors("AllowLocalClient");
 
 app.Run();
