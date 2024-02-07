@@ -16,41 +16,37 @@ export default function Chat() {
   const [messages, setMessages] = useState<Message[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setMessages([...messages, { author: 'User', content: text }])
+    setText('')
+    setTimeout(getResponse, 0)
+  }
+
   const getResponse = async () => {
     setIsLoading(true)
     const response = await fetch(`${API_URL}/prompt/${text}`)
     const data = await response.json()
-    setMessages([...messages,
-    {
-      author: 'User',
-      content: text
-    },
+    setMessages(prevMessages => [...prevMessages,
     {
       author: 'Bot',
       content: data.candidates[0].content
     }
     ])
-    setText('')
     setIsLoading(false)
-  }
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    getResponse()
   }
 
   return (
     <div className="p-6">
       <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white mb-6">Chatbot</h2>
-      {isLoading ? <Loading /> : (
-        <div className="border border-gray-200 dark:border-gray-700 dark:bg-gray-900 p-4 rounded-lg mb-4">
-          {messages.map((message, index) => (
-            <div key={index} className={`mb-4 ${message.author === 'Bot' ? 'text-blue-500' : 'text-green-500'}`}>
-              <strong>{message.author}</strong>: <ReactMarkdown>{message.content}</ReactMarkdown>
-            </div>
-          ))}
-        </div>
-      )}
+      {isLoading && <Loading />}
+      <div className="border border-gray-200 dark:border-gray-700 dark:bg-gray-900 p-4 rounded-lg mb-4">
+        {messages.map((message, index) => (
+          <div key={index} className={`mb-4 ${message.author === 'Bot' ? 'text-blue-500' : 'text-green-500'}`}>
+            <strong>{message.author}</strong>: <ReactMarkdown>{message.content}</ReactMarkdown>
+          </div>
+        ))}
+      </div>
       <form onSubmit={handleSubmit}>
         <label htmlFor="chat" className="sr-only">Your message</label>
         <div className="flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
