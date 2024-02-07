@@ -2,6 +2,7 @@
 
 import React, { useState } from "react"
 import Loading from "./loading";
+import ReactMarkdown from "react-markdown";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -45,7 +46,7 @@ export default function Chat() {
         <div className="border border-gray-200 dark:border-gray-700 dark:bg-gray-900 p-4 rounded-lg mb-4">
           {messages.map((message, index) => (
             <div key={index} className={`mb-4 ${message.author === 'Bot' ? 'text-blue-500' : 'text-green-500'}`}>
-              <strong>{message.author}</strong>: {message.content}
+              <strong>{message.author}</strong>: <ReactMarkdown>{message.content}</ReactMarkdown>
             </div>
           ))}
         </div>
