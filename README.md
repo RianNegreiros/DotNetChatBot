@@ -53,3 +53,7 @@ The application should now be running at `http://localhost:3000`.
  - [TypeScript](https://www.typescriptlang.org/) - The language for building the client
  - [TailwindCSS](https://tailwindcss.com) - The utility-first CSS framework used for styling
  - [PaLM API](https://developers.googleblog.com/2023/03/announcing-palm-api-and-makersuite.html) - The PaLM API is a simple entry point for Google’s large language models
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
