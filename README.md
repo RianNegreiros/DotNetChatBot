@@ -10,8 +10,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-- .NET 8.0 SDK
-- Node.js
+- [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+- [Node.js](https://nodejs.org/en/blog/release/v20.11.0)
 
 ### Installing
 
@@ -23,10 +23,9 @@ These instructions will get you a copy of the project up and running on your loc
 2. Setup the server configuration
 ```bash
   cd src/API
-  cp appsettings.json.example appsettings.json
   cp appsettings.json.example appsettings.Development.json
 ```
-Then set the `LANGUAGE_MODEL_API_KEY` with your PaLM API key
+Then set the `LANGUAGE_MODEL_API_KEY` with your PaLM API key or get one [here](https://ai.google.dev/tutorials/setup)
 
 3. Setup the client configuration
 ```bash
