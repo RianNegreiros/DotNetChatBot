@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react"
 import Loading from "./loading";
 import ReactMarkdown from "react-markdown";
+import DangerError from "./danger-error";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -15,6 +16,7 @@ export default function Chat() {
   const [text, setText] = useState('')
   const [messages, setMessages] = useState<Message[]>([])
   const [isLoading, setIsLoading] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   useEffect(() => {
     const savedMessages = sessionStorage.getItem('messages');
@@ -36,18 +38,27 @@ export default function Chat() {
 
   const getResponse = async () => {
     setIsLoading(true)
-    const response = await fetch(`${API_URL}/prompt/${text}`)
-    const data = await response.json()
-    setMessages(prevMessages => {
-      const newMessages = [...prevMessages, { author: 'Bot', content: data.candidates[0].content }];
-      sessionStorage.setItem('messages', JSON.stringify(newMessages));
-      return newMessages;
-    })
+    try {
+      const response = await fetch(`${API_URL}/prompt/${text}`)
+      const data = await response.json()
+      setMessages(prevMessages => {
+        const newMessages = [...prevMessages, { author: 'Bot', content: data.candidates[0].content }];
+        sessionStorage.setItem('messages', JSON.stringify(newMessages));
+        return newMessages;
+      })
+    } catch (error: any) {
+      setErrorMessage(error.message)
+    }
     setIsLoading(false)
+  }
+
+  const dismissError = () => {
+    setErrorMessage(null)
   }
 
   return (
     <div className="p-6">
+      {errorMessage && <DangerError message={errorMessage} dismissError={dismissError} />}
       <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white mb-6">Chatbot</h2>
       <div className="border border-gray-200 dark:border-gray-700 dark:bg-gray-900 p-4 rounded-lg mb-4">
         {messages.map((message, index) => (
