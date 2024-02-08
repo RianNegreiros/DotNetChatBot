@@ -1,34 +1,14 @@
 using System.Text;
 using System.Text.Json;
-using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
-{
-    options.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Version = "v1",
-        Title = "Chat bot API",
-        Description = "A ASP.NET Core 8 minimal API to generate messages for a chat bot using PaLM 2 API",
-        Contact = new OpenApiContact
-        {
-            Name = "Website",
-            Url = new Uri("https://riannegreiros.dev"),
-        },
-    });
-});
+builder.Services.AddSwaggerExtension();
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy(name: "AllowLocalClient", policy =>
-    policy.WithOrigins(builder.Configuration["Client_Url"] ?? "http://localhost:3000")
-    .AllowAnyHeader()
-    .WithMethods("GET"));
-});
+builder.Services.AddCorsExtension(builder.Configuration);
 
 var app = builder.Build();
 
