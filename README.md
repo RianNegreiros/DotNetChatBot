@@ -19,7 +19,7 @@ These instructions will get you a copy of the project up and running on your loc
 ```
 
 2. Setup the server configuration
-```
+```bash
   cd src/API
   cp appsettings.json.example appsettings.json
   cp appsettings.json.example appsettings.Development.json
@@ -27,7 +27,7 @@ These instructions will get you a copy of the project up and running on your loc
 Then set the `LANGUAGE_MODEL_API_KEY` with your PaLM API key
 
 3. Setup the client configuration
-```
+```bash
   cd src/client
   cp .env.example .env
 ```
