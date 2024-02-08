@@ -2,6 +2,8 @@
 
 This is a full stack application built with ASP.NET Core 8 and Next.js with TypeScript and TailwindCSS. The application is a chat bot powered by PaLM 2.
 
+![Screenshot to showcase the Chat Bot](./docs/sample_screenshot.png)
+
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
