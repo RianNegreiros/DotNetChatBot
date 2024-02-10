@@ -7,8 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerExtension();
-
 builder.Services.AddCorsExtension(builder.Configuration);
+builder.Services.AddHealthChecksExtension(builder.Configuration);
 
 var app = builder.Build();
 
@@ -21,6 +21,8 @@ if (app.Environment.IsDevelopment())
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "API for a Chat Bot");
     });
 }
+
+app.MapHealthChecks("/health");
 
 app.UseHttpsRedirection();
 

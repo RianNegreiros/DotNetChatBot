@@ -32,4 +32,10 @@ public static class BuilderExtensions
       .WithMethods("GET"));
     });
   }
+
+  public static void AddHealthChecksExtension(this IServiceCollection services, IConfiguration config)
+  {
+    services.AddHealthChecks()
+      .AddCheck("google-api", new GoogleColabHealthCheck(new HttpClient(), config));
+  }
 }
