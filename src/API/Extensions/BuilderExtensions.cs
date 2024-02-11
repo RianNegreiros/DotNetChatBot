@@ -35,7 +35,8 @@ public static class BuilderExtensions
 
   public static void AddHealthChecksExtension(this IServiceCollection services, IConfiguration config)
   {
+    services.AddHttpClient();
     services.AddHealthChecks()
-      .AddCheck("google-api", new GoogleColabHealthCheck(new HttpClient(), config));
+      .AddCheck("google-api", new GoogleColabHealthCheck(services.BuildServiceProvider().GetRequiredService<IHttpClientFactory>(), config, services.BuildServiceProvider().GetRequiredService<ILogger<GoogleColabHealthCheck>>()));
   }
 }
