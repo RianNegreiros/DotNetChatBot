@@ -13,14 +13,11 @@ builder.Services.AddHealthChecksExtension(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "API for a Chat Bot");
-    });
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "API for a Chat Bot");
+});
 
 app.MapHealthChecks("/health");
 
@@ -38,13 +35,21 @@ app.MapGet("/prompt/{text}", async (string text, HttpContext httpContext) =>
         candidate_count = 1
     };
 
-    using var httpClient = new HttpClient();
-    var content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
-    var response = await httpClient.PostAsync(languageModelUrl, content);
-    var data = await response.Content.ReadAsStringAsync();
+    try
+    {
+        using var httpClient = new HttpClient();
+        var content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
+        var response = await httpClient.PostAsync(languageModelUrl, content);
+        var data = await response.Content.ReadAsStringAsync();
 
-    Console.WriteLine(data);
-    await httpContext.Response.WriteAsync(data);
+        app.Logger.LogInformation("Response received from the API.");
+
+        await httpContext.Response.WriteAsync(data);
+    }
+    catch (Exception ex)
+    {
+        app.Logger.LogError(ex, "An error occurred while contacting the API.");
+    }
 })
 .WithName("Generate Language Model Response")
 .WithSummary("Return a Language Model Response")
