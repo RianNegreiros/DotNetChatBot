@@ -3,16 +3,10 @@ using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace API.Extensions;
 
-public class GoogleColabHealthCheck : IHealthCheck
+public class GoogleColabHealthCheck(IHttpClientFactory httpClientFactory, IConfiguration configuration) : IHealthCheck
 {
-  private readonly HttpClient _httpClient;
-  private readonly IConfiguration _configuration;
-
-  public GoogleColabHealthCheck(IHttpClientFactory httpClientFactory, IConfiguration configuration)
-  {
-    _httpClient = httpClientFactory.CreateClient();
-    _configuration = configuration;
-  }
+  private readonly HttpClient _httpClient = httpClientFactory.CreateClient();
+  private readonly IConfiguration _configuration = configuration;
 
   public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken)
   {
