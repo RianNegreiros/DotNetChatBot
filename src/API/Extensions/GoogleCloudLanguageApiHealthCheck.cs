@@ -8,9 +8,9 @@ public class GoogleColabHealthCheck : IHealthCheck
   private readonly HttpClient _httpClient;
   private readonly IConfiguration _configuration;
 
-  public GoogleColabHealthCheck(HttpClient httpClient, IConfiguration configuration)
+  public GoogleColabHealthCheck(IHttpClientFactory httpClientFactory, IConfiguration configuration)
   {
-    _httpClient = httpClient;
+    _httpClient = httpClientFactory.CreateClient();
     _configuration = configuration;
   }
 
