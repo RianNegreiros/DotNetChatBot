@@ -27,7 +27,7 @@ These instructions will get you a copy of the project up and running on your loc
  cp appsettings.json.example appsettings.Development.json
 ```
 
-Then set the LANGUAGE_MODEL_API_KEY with your PaLM API key or get one [here](https://ai.google.dev/tutorials/setup)
+Then set the `LANGUAGE_MODEL_API_KEY` with your PaLM API key or get one [here](https://ai.google.dev/tutorials/setup)
 
 3. Setup the client configuration
 ```bash
@@ -52,17 +52,26 @@ Then set the LANGUAGE_MODEL_API_KEY with your PaLM API key or get one [here](htt
 
 If you have Docker and Docker Compose installed, you can use them to run the application:
 
-1. Build the Docker images
+1. Setup the server configuration
 ```bash
-docker compose build
+ cd src/API
+ cp appsettings.json.example appsettings.Development.json
 ```
 
-2. Run the Docker containers
+Then set the `LANGUAGE_MODEL_API_KEY` with your PaLM API key or get one [here](https://ai.google.dev/tutorials/setup)
+
+2. Setup the client configuration
 ```bash
-docker compose up
+ cd src/client
+ cp .env.example .env
 ```
 
-The application should now be running at http://localhost:3000.
+3. Run the Docker containers
+```bash
+docker compose up --build
+```
+
+The application should now be running at `http://localhost:3000`.
 
 ## Built With
   - [ASP.NET Core 8](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-8?source=recommendations) - The server framework
