@@ -42,7 +42,7 @@ app.MapGet("/prompt/{text}", async (string text, HttpContext httpContext) =>
         var response = await httpClient.PostAsync(languageModelUrl, content);
         var data = await response.Content.ReadAsStringAsync();
 
-        app.Logger.LogInformation("Response received from the API.");
+        app.Logger.LogInformation($"Response received from the API: {data}");
 
         await httpContext.Response.WriteAsync(data);
     }

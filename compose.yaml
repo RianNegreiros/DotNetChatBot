@@ -1,0 +1,17 @@
+services:
+  server:
+    build:
+      context: .
+      target: final
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - 8080:8080
+
+  client:
+    build:
+      context: ./src/client
+    depends_on:
+      - server
+    ports:
+      - 3000:3000

@@ -1,4 +1,6 @@
-@ChatBot_HostAddress = http://localhost:5111
+# default port without docker: 5111
+
+@ChatBot_HostAddress = http://localhost:8080
 
 GET {{ChatBot_HostAddress}}/prompt/What is ASP.NET Core
 Accept: application/json
