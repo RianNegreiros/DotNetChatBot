@@ -23,7 +23,10 @@ app.MapHealthChecks("/health");
 
 app.UseHttpsRedirection();
 
-app.MapGet("/prompt/{text}", async (string text, HttpContext httpContext) =>
+app.MapGet("/prompt/{text}", async (
+    string text,
+    IHttpClientFactory factory,
+    HttpContext httpContext) =>
 {
     var languageModelApiKey = app.Configuration["LANGUAGE_MODEL_API_KEY"];
     var languageModelUrl = $"https://generativelanguage.googleapis.com/v1beta1/models/chat-bison-001:generateMessage?key={languageModelApiKey}";
@@ -37,7 +40,7 @@ app.MapGet("/prompt/{text}", async (string text, HttpContext httpContext) =>
 
     try
     {
-        using var httpClient = new HttpClient();
+        using var httpClient = factory.CreateClient();
         var content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
         var response = await httpClient.PostAsync(languageModelUrl, content);
         var data = await response.Content.ReadAsStringAsync();
