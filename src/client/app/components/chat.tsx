@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import Loading from "./loading";
 import ReactMarkdown from "react-markdown";
 import DangerError from "./danger-error";
@@ -18,12 +18,18 @@ export default function Chat() {
   const [isLoading, setIsLoading] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const savedMessages = sessionStorage.getItem('messages');
     if (savedMessages) {
       setMessages(JSON.parse(savedMessages));
     }
   }, []);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+  }, [messages])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -60,12 +66,15 @@ export default function Chat() {
     <div className="p-6">
       {errorMessage && <DangerError message={errorMessage} dismissError={dismissError} />}
       <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white mb-6">Chatbot</h2>
-      <div className="border border-gray-200 dark:border-gray-700 dark:bg-gray-900 p-4 rounded-lg mb-4">
+      <div
+        className="border border-gray-200 dark:border-gray-700 dark:bg-gray-900 p-4 rounded-lg mb-4"
+      >
         {messages.map((message, index) => (
           <div key={index} className={`mb-4 ${message.author === 'Bot' ? 'text-blue-500' : 'text-green-500'}`}>
             <strong>{message.author}</strong>: <ReactMarkdown>{message.content}</ReactMarkdown>
           </div>
         ))}
+        <div ref={messagesEndRef} />
       </div>
       {isLoading && <Loading />}
       <form onSubmit={handleSubmit}>
