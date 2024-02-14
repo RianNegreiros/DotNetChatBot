@@ -32,5 +32,6 @@
 **/values.dev.yaml
 **/build
 **/dist
+global.json
 LICENSE
 README.md
