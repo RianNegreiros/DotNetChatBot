@@ -3,8 +3,14 @@ name: Docker Compose CI
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'src/API/**'
+      - 'src/client/app/**'
   pull_request:
     branches: [ "main" ]
+    paths:
+      - 'src/API/**'
+      - 'src/client/app/**'
 
 jobs:
   build:
