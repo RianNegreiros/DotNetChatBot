@@ -1,5 +1,14 @@
 [![Docker Compose CI](https://github.com/RianNegreiros/DotNetChatBot/actions/workflows/docker-ci.yml/badge.svg)](https://github.com/RianNegreiros/DotNetChatBot/actions/workflows/docker-ci.yml)
 
+# Table of Contents
+1. [Introduction](#chat-bot-application)
+2. [Getting Started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installing](#installing)
+3. [Running with Docker Compose](#running-with-docker-compose)
+4. [Built With](#built-with)
+5. [License](#license)
+
 # Chat Bot Application
 
 This is a full stack application built with ASP.NET Core 8 and Next.js with TypeScript and TailwindCSS. The application is a chat bot powered by PaLM 2.
