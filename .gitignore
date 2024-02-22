@@ -485,4 +485,6 @@ $RECYCLE.BIN/
 
 appsettings.json
 appsettings.Development.json
+
+# C# Dev Kit autogenerate file
 src/API/API.sln
