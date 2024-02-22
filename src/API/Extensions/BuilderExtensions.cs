@@ -29,7 +29,7 @@ public static class BuilderExtensions
             options.AddPolicy(name: "AllowLocalClient", policy =>
         policy.WithOrigins([
           config["Client_Url"] ?? "http://localhost:3000",
-        "http://client:3000"
+            "http://client:3000"
         ])
         .AllowAnyHeader()
         .WithMethods("GET"));
