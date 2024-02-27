@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import Loading from './loading'
 import ReactMarkdown from 'react-markdown'
 import DangerError from './danger-error'
+import axios, { AxiosError } from 'axios'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL
 
@@ -45,8 +46,8 @@ export default function Chat() {
   const getResponse = async () => {
     setIsLoading(true)
     try {
-      const response = await fetch(`${API_URL}/prompt/${text}`)
-      const data = await response.json()
+      const response = await axios.get(`${API_URL}/prompt/${text}`)
+      const data = response.data
       setMessages((prevMessages) => {
         const newMessages = [
           ...prevMessages,
@@ -55,8 +56,13 @@ export default function Chat() {
         sessionStorage.setItem('messages', JSON.stringify(newMessages))
         return newMessages
       })
-    } catch (error: any) {
-      setErrorMessage(error.message)
+    } catch (error) {
+      const axiosError = error as AxiosError
+      let errorMessage = 'An unexpected error occurred'
+      if (axiosError.response) {
+        errorMessage = axiosError.message
+      }
+      setErrorMessage(errorMessage)
     }
     setIsLoading(false)
   }
