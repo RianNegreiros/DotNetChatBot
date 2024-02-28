@@ -1,75 +1,27 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import Loading from './loading'
 import ReactMarkdown from 'react-markdown'
 import DangerError from './danger-error'
-import axios, { AxiosError } from 'axios'
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL
-
-type Message = {
-  author: string
-  content: string
-}
+import { useChat } from '../hooks/useChat'
 
 export default function Chat() {
-  const [text, setText] = useState('')
-  const [messages, setMessages] = useState<Message[]>([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const {
+    text,
+    setText,
+    messages,
+    isLoading,
+    errorMessage,
+    handleSubmit,
+    dismissError,
+  } = useChat()
 
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    const savedMessages = sessionStorage.getItem('messages')
-    if (savedMessages) {
-      setMessages(JSON.parse(savedMessages))
-    }
-  }, [])
-
-  useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setMessages((prevMessages) => {
-      const newMessages = [...prevMessages, { author: 'User', content: text }]
-      sessionStorage.setItem('messages', JSON.stringify(newMessages))
-      return newMessages
-    })
-    setText('')
-    setTimeout(getResponse, 0)
-  }
-
-  const getResponse = async () => {
-    setIsLoading(true)
-    try {
-      const response = await axios.get(`${API_URL}/prompt/${text}`)
-      const data = response.data
-      setMessages((prevMessages) => {
-        const newMessages = [
-          ...prevMessages,
-          { author: 'Bot', content: data.candidates[0].content },
-        ]
-        sessionStorage.setItem('messages', JSON.stringify(newMessages))
-        return newMessages
-      })
-    } catch (error) {
-      const axiosError = error as AxiosError
-      let errorMessage = 'An unexpected error occurred'
-      if (axiosError.response) {
-        errorMessage = axiosError.message
-      }
-      setErrorMessage(errorMessage)
-    }
-    setIsLoading(false)
-  }
-
-  const dismissError = () => {
-    setErrorMessage(null)
-  }
 
   return (
     <div className='p-6'>
