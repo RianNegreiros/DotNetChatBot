@@ -6,7 +6,7 @@ namespace API.Extensions;
 
 public class GoogleColabHealthCheck(IHttpClientFactory httpClientFactory, IConfiguration configuration, ILogger<GoogleColabHealthCheck> logger) : IHealthCheck
 {
-    private readonly HttpClient _httpClient = httpClientFactory.CreateClient();
+    private readonly IHttpClientFactory _httpClientFactory = httpClientFactory;
     private readonly IConfiguration _configuration = configuration;
     private readonly ILogger<GoogleColabHealthCheck> _logger = logger;
 
@@ -14,6 +14,7 @@ public class GoogleColabHealthCheck(IHttpClientFactory httpClientFactory, IConfi
     {
         try
         {
+            var httpClient = _httpClientFactory.CreateClient();
             var languageModelApiKey = _configuration["LANGUAGE_MODEL_API_KEY"];
             var request = new HttpRequestMessage(HttpMethod.Post, $"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={languageModelApiKey}")
             {
@@ -23,7 +24,7 @@ public class GoogleColabHealthCheck(IHttpClientFactory httpClientFactory, IConfi
                 "application/json")
             };
 
-            HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+            HttpResponseMessage response = await httpClient.SendAsync(request, cancellationToken);
 
             if (response.IsSuccessStatusCode)
             {
