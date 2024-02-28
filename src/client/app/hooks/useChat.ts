@@ -60,5 +60,13 @@ export const useChat = () => {
     setErrorMessage(null)
   }
 
-  return { text, setText, messages, isLoading, errorMessage, handleSubmit, dismissError }
+  return {
+    text,
+    setText,
+    messages,
+    isLoading,
+    errorMessage,
+    handleSubmit,
+    dismissError,
+  }
 }
