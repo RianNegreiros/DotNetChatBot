@@ -1,3 +1,11 @@
-*
-
-!src/client
+src/API
+docs
+README.md
+LICENSE
+ChatBot.sln
+global.json
+compose.yaml
+.github
+.dockerignore
+.gitignore
+.editorconfig
