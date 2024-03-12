@@ -1,5 +1,6 @@
 using System.Text;
 using System.Text.Json;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,19 @@ builder.Services.AddServicesExtension();
 builder.Services.AddSwaggerExtension();
 builder.Services.AddCorsExtension(builder.Configuration);
 builder.Services.AddHealthChecksExtension(builder.Configuration);
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
+    options.AddPolicy("fixed", httpContext =>
+            RateLimitPartition.GetFixedWindowLimiter(
+                partitionKey: httpContext.Connection.RemoteIpAddress?.ToString(),
+                factory: partition => new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 10,
+                    Window = TimeSpan.FromSeconds(10)
+                }));
+});
 
 var app = builder.Build();
 
@@ -20,6 +34,8 @@ app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API for a C
 app.MapHealthChecks("/health");
 
 app.UseHttpsRedirection();
+
+app.UseRateLimiter();
 
 app.MapGet("/prompt/{text}", async (
     string text,
@@ -63,7 +79,8 @@ app.MapGet("/prompt/{text}", async (
 })
 .Produces(StatusCodes.Status200OK)
 .Produces(StatusCodes.Status400BadRequest)
-.Produces(StatusCodes.Status500InternalServerError);
+.Produces(StatusCodes.Status500InternalServerError)
+.RequireRateLimiting("fixed");
 
 app.UseCors("AllowLocalClient");
 
