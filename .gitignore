@@ -384,6 +384,7 @@ FodyWeavers.xsd
 
 # VS Code files for those working on multiple tools
 .vscode/*
+.vscode
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
@@ -485,6 +486,3 @@ $RECYCLE.BIN/
 
 appsettings.json
 appsettings.Development.json
-
-# C# Dev Kit autogenerate file
-src/API/API.sln
