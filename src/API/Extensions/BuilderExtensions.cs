@@ -21,7 +21,7 @@ public static class BuilderExtensions
 
     public static void AddCorsExtension(this IServiceCollection services, IConfiguration config)
     {
-        services.AddCors(options => options.AddPolicy(name: "AllowLocalClient", policy =>
+        services.AddCors(options => options.AddPolicy(name: "AllowClient", policy =>
         policy.WithOrigins([
           config["Client_Url"] ?? "http://localhost:3000",
             "http://client:3000"

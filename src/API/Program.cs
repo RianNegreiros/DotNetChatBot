@@ -82,6 +82,6 @@ app.MapGet("/prompt/{text}", async (
 .Produces(StatusCodes.Status500InternalServerError)
 .RequireRateLimiting("fixed");
 
-app.UseCors("AllowLocalClient");
+app.UseCors("AllowClient");
 
 app.Run();
