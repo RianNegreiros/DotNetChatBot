@@ -17,11 +17,18 @@ export default function Chat() {
     dismissError,
   } = useChat()
 
+  const inputRef = useRef<HTMLInputElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
+
+  useEffect(() => {
+    if (!isLoading) {
+      inputRef.current?.focus();
+    }
+  }, [isLoading]);
 
   return (
     <div className='p-6'>
@@ -51,6 +58,8 @@ export default function Chat() {
         <div className='flex items-center rounded-lg bg-gray-50 px-3 py-2 dark:bg-gray-700'>
           <input
             id='chat'
+            disabled={isLoading}
+            ref={inputRef}
             className='mx-4 block w-full rounded-lg border border-gray-300 bg-white p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500'
             placeholder='Your message...'
             value={text}
@@ -58,6 +67,7 @@ export default function Chat() {
           />
           <button
             type='submit'
+            disabled={isLoading}
             className='inline-flex cursor-pointer justify-center rounded-full p-2 text-blue-600 hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600'
           >
             <svg
