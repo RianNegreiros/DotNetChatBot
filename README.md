@@ -94,36 +94,48 @@ The application should now be running at `http://localhost:3000`.
 
 ## Usage
 
-The API has the following endpoints:
+### API
 
-- `/prompt/{text}`: This endpoint generates a language model response from the PaLM 2 API. The `{text}` parameter is the text to be processed by the language model. The endpoint returns a JSON response with the generated message.
+  The API has the following endpoints:
 
-- `/health`: This endpoint checks the health of the application and its connection to the Google API.
+  - `/prompt/{text}`: This endpoint generates a language model response from the PaLM 2 API. The `{text}` parameter is the text to be processed by the language model. The endpoint returns a JSON response with the generated message.
 
-The API also includes Swagger UI for testing and documenting the API endpoints. You can access it at `/swagger`.
+  - `/health`: This endpoint checks the health of the application and its connection to the Google API.
 
-## Extensions
+  The API also includes Swagger UI for testing and documenting the API endpoints. You can access it at `/swagger`.
 
-The project includes the following extensions:
+  #### Extensions
 
-- `AddSwaggerExtension`: This extension adds Swagger/OpenAPI support to the project.
+  The project includes the following extensions:
 
-- `AddCorsExtension`: This extension adds CORS policy to the project. By default, it allows GET requests from `http://localhost:3000` and `http://client:3000`(If running on Docker).
+  - `AddSwaggerExtension`: This extension adds Swagger/OpenAPI support to the project.
 
-- `AddHealthChecksExtension`: This extension adds health checks to the project. It includes a custom health check for the Google API.
+  - `AddCorsExtension`: This extension adds CORS policy to the project. By default, it allows GET requests from `http://localhost:3000` and `http://client:3000`(If running on Docker).
 
-- `AddServicesExtension`: This extension adds an HTTP client to the project.
+  - `AddHealthChecksExtension`: This extension adds health checks to the project. It includes a custom health check for the Google API.
+
+  - `AddServicesExtension`: This extension adds an HTTP client to the project.
+
+  ### Client
+
+  The client has a chat interface where you can interact with the chat bot. The chat interface is rendered by the `Chat` component. The `Chat` component uses the `useChat` hook to manage the state of the chat.
+
+  The `useChat` hook uses the `axios` library to send GET requests to the chat bot API. The responses from the API are stored in the `messages` state variable. The `messages` state variable is also stored in the session storage to persist the chat history across page reloads.
+
+  The `Chat` component also uses the `Loading` component to display a loading animation while waiting for the response from the API, and the `DangerError` component to display any error messages.
 
 ## Rate Limiting
 
 The project uses rate limiting to limit the number of requests from a single IP address. The limit is set to 10 requests per 10 seconds. If the limit is exceeded, the API will return a 429 Too Many Requests status code.
 
 ## Built With
-  - [ASP.NET Core 8](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-8?source=recommendations) - The server framework
-  - [Next.js](https://nextjs.org/docs) - The client framework
-  - [TypeScript](https://www.typescriptlang.org/) - The language for building the client
-  - [TailwindCSS](https://tailwindcss.com) - The utility-first CSS framework used for styling
-  - [PaLM API](https://developers.googleblog.com/2023/03/announcing-palm-api-and-makersuite.html) - The PaLM API is a simple entry point for Google’s large language models
+  - [ASP.NET Core 8](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-8?source=recommendations)
+  - [PaLM API](https://developers.googleblog.com/2023/03/announcing-palm-api-and-makersuite.html)
+  - [Next.js](https://nextjs.org/docs)
+  - [TypeScript](https://www.typescriptlang.org/)
+  - [TailwindCSS](https://tailwindcss.com)
+  - [axios](https://axios-http.com/)
+  - [React Markdown](https://github.com/remarkjs/react-markdown)
 
 ## Contact
 
