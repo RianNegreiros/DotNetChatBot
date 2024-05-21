@@ -31,7 +31,6 @@ These instructions will get you a copy of the project up and running on your loc
 
 - [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 - [Node.js](https://nodejs.org/en/blog/release/v20.11.0)
-- [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/)
 
 ### Installing
 
