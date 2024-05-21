@@ -35,9 +35,6 @@ export default function Chat() {
       {errorMessage && (
         <DangerError message={errorMessage} dismissError={dismissError} />
       )}
-      <h2 className='mb-6 text-lg font-bold text-gray-900 lg:text-2xl dark:text-white'>
-        Chatbot
-      </h2>
       <div className='mb-4 rounded-lg border border-gray-200 p-4 dark:border-gray-700 dark:bg-gray-900'>
         {messages.map((message, index) => (
           <div
@@ -49,8 +46,8 @@ export default function Chat() {
           </div>
         ))}
         <div ref={messagesEndRef} />
+        {isLoading && <Loading />}
       </div>
-      {isLoading && <Loading />}
       <form onSubmit={handleSubmit}>
         <label htmlFor='chat' className='sr-only'>
           Your message
