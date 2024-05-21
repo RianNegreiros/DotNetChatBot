@@ -115,6 +115,10 @@ The application should now be running at `http://localhost:3000`.
 
   - `AddServicesExtension`: This extension adds an HTTP client to the project.
 
+  #### Rate Limiting
+
+  The project uses rate limiting to limit the number of requests from a single IP address. The limit is set to 10 requests per 10 seconds. If the limit is exceeded, the API will return a 429 Too Many Requests status code.
+
   ### Client
 
   The client has a chat interface where you can interact with the chat bot. The chat interface is rendered by the `Chat` component. The `Chat` component uses the `useChat` hook to manage the state of the chat.
@@ -122,10 +126,6 @@ The application should now be running at `http://localhost:3000`.
   The `useChat` hook uses the `axios` library to send GET requests to the chat bot API. The responses from the API are stored in the `messages` state variable. The `messages` state variable is also stored in the session storage to persist the chat history across page reloads.
 
   The `Chat` component also uses the `Loading` component to display a loading animation while waiting for the response from the API, and the `DangerError` component to display any error messages.
-
-## Rate Limiting
-
-The project uses rate limiting to limit the number of requests from a single IP address. The limit is set to 10 requests per 10 seconds. If the limit is exceeded, the API will return a 429 Too Many Requests status code.
 
 ## Built With
   - [ASP.NET Core 8](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-8?source=recommendations)
