@@ -11,23 +11,17 @@ public static class BuilderExtensions
             Version = "v1",
             Title = "Chat bot API",
             Description = "A ASP.NET Core 8 minimal API to generate messages for a chat bot using PaLM 2 API",
-            Contact = new OpenApiContact
-            {
-                Name = "Website",
-                Url = new Uri("https://riannegreiros.dev"),
-            },
         }));
     }
 
     public static void AddCorsExtension(this IServiceCollection services, IConfiguration config)
     {
+        var clientUrl = config["Client_Url"] ?? "http://localhost:3000";
+
         services.AddCors(options => options.AddPolicy(name: "AllowClient", policy =>
-        policy.WithOrigins([
-          config["Client_Url"] ?? "http://localhost:3000",
-            "http://client:3000"
-        ])
+        policy.WithOrigins(clientUrl)
         .AllowAnyHeader()
-        .WithMethods("GET")));
+        .WithMethods("POST")));
     }
 
     public static void AddHealthChecksExtension(this IServiceCollection services, IConfiguration config)

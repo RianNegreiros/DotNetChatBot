@@ -6,5 +6,6 @@
     }
   },
   "LANGUAGE_MODEL_API_KEY": "",
-  "AllowedHosts": "*"
+  "AllowedHosts": "*",
+  "ClientUrl": "http://localhost:3000"
 }
