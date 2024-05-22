@@ -37,7 +37,7 @@ app.UseHttpsRedirection();
 
 app.UseRateLimiter();
 
-app.MapGet("/prompt/{text}", async (
+app.MapPost("/prompt/{text}", async (
     string text,
     IHttpClientFactory factory,
     HttpContext httpContext) =>
@@ -70,7 +70,7 @@ app.MapGet("/prompt/{text}", async (
 })
 .WithName("Generate Language Model Response")
 .WithSummary("Return a Language Model Response")
-.WithDescription("Return a Language Model Response from PaLM 2 API")
+.WithDescription("Return a Language Model Response from PaLM API")
 .WithOpenApi(generatedOperation =>
 {
     var parameter = generatedOperation.Parameters[0];

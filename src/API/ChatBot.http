@@ -2,7 +2,7 @@
 
 @ChatBot_HostAddress = http://localhost:8080
 
-GET {{ChatBot_HostAddress}}/prompt/Hello
+POST {{ChatBot_HostAddress}}/prompt/Hello
 Accept: application/json
 
 ###

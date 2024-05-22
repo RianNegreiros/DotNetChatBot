@@ -35,7 +35,7 @@ export const useChat = () => {
   const getResponse = async () => {
     setIsLoading(true)
     try {
-      const response = await axios.get(`${API_URL}/prompt/${text}`)
+      const response = await axios.post(`${API_URL}/prompt/${text}`)
       const data = response.data
       setMessages((prevMessages) => {
         const newMessages = [
