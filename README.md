@@ -76,7 +76,7 @@ If you have Docker Compose installed, you can use it to run the application:
  cp appsettings.json.example appsettings.json
 ```
 
-Then set the `LANGUAGE_MODEL_API_KEY` with your PaLM API key or get one [here](https://ai.google.dev/tutorials/setup)
+Then set the `LANGUAGE_MODEL:API_KEY` with your PaLM API key or get one [here](https://ai.google.dev/tutorials/setup)
 
 2. Setup the client configuration
 ```bash
@@ -97,7 +97,7 @@ The application should now be running at `http://localhost:3000`.
 
   The API has the following endpoints:
 
-  - `/prompt/{text}`: This endpoint generates a language model response from the PaLM 2 API. The `{text}` parameter is the text to be processed by the language model. The endpoint returns a JSON response with the generated message.
+  - `/prompt/{text}`: This endpoint generates a language model response from the PaLM API. The `{text}` parameter is the text to be processed by the language model. The endpoint returns a JSON response with the generated message.
 
   - `/health`: This endpoint checks the health of the application and its connection to the Google API.
 
@@ -109,7 +109,7 @@ The application should now be running at `http://localhost:3000`.
 
   - `AddSwaggerExtension`: This extension adds Swagger/OpenAPI support to the project.
 
-  - `AddCorsExtension`: This extension adds CORS policy to the project. By default, it allows GET requests from `http://localhost:3000` and `http://client:3000`(If running on Docker).
+  - `AddCorsExtension`: This extension adds CORS policy to the project. By default, it allows POST requests from `http://localhost:3000`.
 
   - `AddHealthChecksExtension`: This extension adds health checks to the project. It includes a custom health check for the Google API.
 
@@ -123,7 +123,7 @@ The application should now be running at `http://localhost:3000`.
 
   The client has a chat interface where you can interact with the chat bot. The chat interface is rendered by the `Chat` component. The `Chat` component uses the `useChat` hook to manage the state of the chat.
 
-  The `useChat` hook uses the `axios` library to send GET requests to the chat bot API. The responses from the API are stored in the `messages` state variable. The `messages` state variable is also stored in the session storage to persist the chat history across page reloads.
+  The `useChat` hook uses the `axios` library to send POST requests to the chat bot API. The responses from the API are stored in the `messages` state variable. The `messages` state variable is also stored in the session storage to persist the chat history across page reloads.
 
   The `Chat` component also uses the `Loading` component to display a loading animation while waiting for the response from the API, and the `DangerError` component to display any error messages.
 
