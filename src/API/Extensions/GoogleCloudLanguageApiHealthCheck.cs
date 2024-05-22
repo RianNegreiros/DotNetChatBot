@@ -15,11 +15,11 @@ public class GoogleColabHealthCheck(IHttpClientFactory httpClientFactory, IConfi
         try
         {
             var httpClient = _httpClientFactory.CreateClient();
-            var languageModelApiKey = _configuration["LANGUAGE_MODEL_API_KEY"];
+            var languageModelApiKey = _configuration["LANGUAGE_MODEL:API_KEY"];
             var request = new HttpRequestMessage(HttpMethod.Post, $"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={languageModelApiKey}")
             {
                 Content = new StringContent(
-                "{ \"contents\":[{\"parts\":[{\"text\":\"hello\"}]}] }",
+                "{ \"contents\":[{\"parts\":[{\"text\":\"hi\"}]}] }",
                 Encoding.UTF8,
                 "application/json")
             };
