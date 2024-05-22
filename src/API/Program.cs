@@ -42,8 +42,8 @@ app.MapPost("/prompt/{text}", async (
     IHttpClientFactory factory,
     HttpContext httpContext) =>
 {
-    var languageModelApiKey = app.Configuration["LANGUAGE_MODEL_API_KEY"];
-    var languageModelUrl = $"https://generativelanguage.googleapis.com/v1beta1/models/chat-bison-001:generateMessage?key={languageModelApiKey}";
+    var languageModelApiKey = app.Configuration["LANGUAGE_MODEL:API_KEY"];
+    var languageModelUrl = $"{app.Configuration["LANGUAGE_MODEL:URL"]}?key={languageModelApiKey}";
 
     var payload = new
     {

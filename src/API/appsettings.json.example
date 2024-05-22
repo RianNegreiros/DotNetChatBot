@@ -5,7 +5,10 @@
       "Microsoft.AspNetCore": "Warning"
     }
   },
-  "LANGUAGE_MODEL_API_KEY": "",
+  "LANGUAGE_MODEL": {
+    "URL": "https://generativelanguage.googleapis.com/v1beta1/models/chat-bison-001:generateMessage",
+    "API_KEY": ""
+  }
   "AllowedHosts": "*",
   "ClientUrl": "http://localhost:3000"
 }
