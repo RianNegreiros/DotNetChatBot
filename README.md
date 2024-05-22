@@ -45,7 +45,7 @@ These instructions will get you a copy of the project up and running on your loc
  cp appsettings.json.example appsettings.json
 ```
 
-Then set the `LANGUAGE_MODEL_API_KEY` with your PaLM API key or get one [here](https://ai.google.dev/tutorials/setup)
+Then set the `LANGUAGE_MODEL:API_KEY` with your PaLM API key or get one [here](https://ai.google.dev/gemini-api/docs/api-key)
 
 3. Setup the client configuration
 ```bash
@@ -76,7 +76,7 @@ If you have Docker Compose installed, you can use it to run the application:
  cp appsettings.json.example appsettings.json
 ```
 
-Then set the `LANGUAGE_MODEL:API_KEY` with your PaLM API key or get one [here](https://ai.google.dev/tutorials/setup)
+Then set the `LANGUAGE_MODEL:API_KEY` with your PaLM API key or get one [here](https://ai.google.dev/gemini-api/docs/api-key)
 
 2. Setup the client configuration
 ```bash
@@ -84,7 +84,7 @@ Then set the `LANGUAGE_MODEL:API_KEY` with your PaLM API key or get one [here](h
  cp .env.example .env
 ```
 
-3. Run the Docker containers
+3. Run the Docker compose
 ```bash
 docker compose up --build
 ```
