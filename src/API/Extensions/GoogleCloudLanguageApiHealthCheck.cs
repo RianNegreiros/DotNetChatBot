@@ -16,7 +16,7 @@ public class GoogleColabHealthCheck(IHttpClientFactory httpClientFactory, IConfi
         {
             var httpClient = _httpClientFactory.CreateClient();
             var languageModelApiKey = _configuration["LANGUAGE_MODEL:API_KEY"];
-            var request = new HttpRequestMessage(HttpMethod.Post, $"https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key={languageModelApiKey}")
+            var request = new HttpRequestMessage(HttpMethod.Post, $"{_configuration["LANGUAGE_MODEL:URL"]}?key={languageModelApiKey}")
             {
                 Content = new StringContent(
                 "{ \"contents\":[{\"parts\":[{\"text\":\"hi\"}]}] }",
