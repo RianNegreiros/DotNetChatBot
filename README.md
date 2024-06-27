@@ -21,7 +21,7 @@ This is a full stack application built with ASP.NET Core 8 and Next.js with Type
 
 # Article Reference
 
-This application is part of the blog post titled "[Building a Chatbot with ASP.NET Core 8 and PaLM 2 API](https://www.riannegreiros.dev/posts/building-a-chatbot-with-aspnet-core-8-and-palm-2-api)". Feel free to read the article for a more detailed explanation of the application.
+This application is part of the blog post titled "[Creating a Chatbot with ASP.NET Core, Next.js and PaLM API](https://riannegreiros.dev/post/creating-a-chatbot-with-asp-net-core-next-js-and-palm-api)". Feel free to read the article for a more detailed explanation of the application.
 
 ## Getting Started
 
