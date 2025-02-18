@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Chat Bot',
-  description: 'Chat Bot powered by PaLM 2',
+  description: 'Chat Bot powered by Google Gemini',
 }
 
 export default function RootLayout({

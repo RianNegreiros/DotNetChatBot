@@ -36,11 +36,20 @@ export const useChat = () => {
     setIsLoading(true)
     try {
       const response = await axios.post(`${API_URL}/prompt/${text}`)
-      const data = response.data
+      const data: {
+        candidates: {
+          content: {
+            parts: { text: string }[]
+          }
+        }[]
+      } = response.data
+
+      const botMessage = data.candidates[0].content.parts.map((part) => part.text).join(' ')
+
       setMessages((prevMessages) => {
         const newMessages = [
           ...prevMessages,
-          { author: 'Bot', content: data.candidates[0].content },
+          { author: 'Bot', content: botMessage },
         ]
         sessionStorage.setItem('messages', JSON.stringify(newMessages))
         return newMessages
