@@ -40,7 +40,8 @@ These instructions will get you a copy of the project up and running on your loc
  cp appsettings.json.example appsettings.json
 ```
 
-Then set the `LANGUAGE_MODEL:API_KEY` with your PaLM API key or get one [here](https://ai.google.dev/gemini-api/docs/api-key)
+Then set the `LANGUAGE_MODEL:API_KEY` with your Gemini API key or get one [here](https://ai.google.dev/gemini-api/docs/api-key)
+Set the `LANGUAGE_MODEL:URL` based on [REST example from the docs](https://ai.google.dev/gemini-api/docs#rest)
 
 3. Setup the client configuration
 ```bash
@@ -72,6 +73,7 @@ If you have Docker Compose installed, you can use it to run the application:
 ```
 
 Then set the `LANGUAGE_MODEL:API_KEY` with your PaLM API key or get one [here](https://ai.google.dev/gemini-api/docs/api-key)
+Set the `LANGUAGE_MODEL:URL` based on [REST example from the docs](https://ai.google.dev/gemini-api/docs#rest)
 
 2. Setup the client configuration
 ```bash
@@ -124,7 +126,7 @@ The application should now be running at `http://localhost:3000`.
 
 ## Built With
   - [ASP.NET Core 8](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-8?source=recommendations)
-  - [PaLM API](https://developers.googleblog.com/2023/03/announcing-palm-api-and-makersuite.html)
+  - [Gemini API](https://ai.google.dev)
   - [Next.js](https://nextjs.org/docs)
   - [TypeScript](https://www.typescriptlang.org/)
   - [TailwindCSS](https://tailwindcss.com)
