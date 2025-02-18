@@ -6,9 +6,9 @@
     }
   },
   "LANGUAGE_MODEL": {
-    "URL": "https://generativelanguage.googleapis.com/v1beta1/models/chat-bison-001:generateMessage",
+    "URL": "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent",
     "API_KEY": ""
-  }
+  },
   "AllowedHosts": "*",
   "ClientUrl": "http://localhost:3000"
 }
