@@ -10,18 +10,13 @@
 4. [Extensions](#extensions)
 5. [Rate Limiting](#rate-limiting)
 6. [Built With](#built-with)
-7. [Contact](#contact)
-8. [License](#license)
+7. [License](#license)
 
 # Chat Bot Application
 
-This is a full stack application built with ASP.NET Core 8 and Next.js with TypeScript and TailwindCSS. The application is a chat bot powered by PaLM 2.
+This is a full stack application built with ASP.NET Core 8 and Next.js with TypeScript and TailwindCSS. The application is a chat bot powered by Google Gemini.
 
 ![GIF to showcase the Chat Bot](./docs/chatbot-demo.gif)
-
-# Article Reference
-
-This application is part of the blog post titled "[Creating a Chatbot with ASP.NET Core, Next.js and PaLM API](https://riannegreiros.dev/post/creating-a-chatbot-with-asp-net-core-next-js-and-palm-api)". Feel free to read the article for a more detailed explanation of the application.
 
 ## Getting Started
 
@@ -135,10 +130,6 @@ The application should now be running at `http://localhost:3000`.
   - [TailwindCSS](https://tailwindcss.com)
   - [axios](https://axios-http.com/)
   - [React Markdown](https://github.com/remarkjs/react-markdown)
-
-## Contact
-
-Website: [riannegreiros.dev](https://riannegreiros.dev)
 
 ## License
 
