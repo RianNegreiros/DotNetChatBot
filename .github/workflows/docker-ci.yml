@@ -5,12 +5,12 @@ on:
     branches: [ "main" ]
     paths:
       - 'src/API/**'
-      - 'src/client/app/**'
+      - 'src/client/**'
   pull_request:
     branches: [ "main" ]
     paths:
       - 'src/API/**'
-      - 'src/client/app/**'
+      - 'src/client/**'
 
 jobs:
   build:
