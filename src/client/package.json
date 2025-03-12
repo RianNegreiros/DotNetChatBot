@@ -13,22 +13,22 @@
   "dependencies": {
     "axios": "^1.7.2",
     "next": "14.2.4",
-    "react": "^18",
+    "react": "^19",
     "react-dom": "^18",
     "react-markdown": "^9.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^18",
+    "@types/react": "^19",
     "@types/react-dom": "^18",
-    "@typescript-eslint/eslint-plugin": "^7.10.0",
+    "@typescript-eslint/eslint-plugin": "^8.26.1",
     "@typescript-eslint/parser": "^7.10.0",
-    "autoprefixer": "^10.4.19",
+    "autoprefixer": "^10.4.21",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
     "eslint-config-prettier": "^9.1.0",
     "postcss": "^8",
-    "prettier": "^3.3.2",
+    "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.5.14",
     "tailwindcss": "^3.4.3",
     "typescript": "^5"

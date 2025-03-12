@@ -10,18 +10,13 @@
 4. [Extensions](#extensions)
 5. [Rate Limiting](#rate-limiting)
 6. [Built With](#built-with)
-7. [Contact](#contact)
-8. [License](#license)
+7. [License](#license)
 
 # Chat Bot Application
 
-This is a full stack application built with ASP.NET Core 8 and Next.js with TypeScript and TailwindCSS. The application is a chat bot powered by PaLM 2.
+This is a full stack application built with ASP.NET Core 8 and Next.js with TypeScript and TailwindCSS. The application is a chat bot powered by Google Gemini.
 
 ![GIF to showcase the Chat Bot](./docs/chatbot-demo.gif)
-
-# Article Reference
-
-This application is part of the blog post titled "[Creating a Chatbot with ASP.NET Core, Next.js and PaLM API](https://riannegreiros.dev/post/creating-a-chatbot-with-asp-net-core-next-js-and-palm-api)". Feel free to read the article for a more detailed explanation of the application.
 
 ## Getting Started
 
@@ -45,7 +40,8 @@ These instructions will get you a copy of the project up and running on your loc
  cp appsettings.json.example appsettings.json
 ```
 
-Then set the `LANGUAGE_MODEL:API_KEY` with your PaLM API key or get one [here](https://ai.google.dev/gemini-api/docs/api-key)
+Then set the `LANGUAGE_MODEL:API_KEY` with your Gemini API key or get one [here](https://ai.google.dev/gemini-api/docs/api-key)
+Set the `LANGUAGE_MODEL:URL` based on [REST example from the docs](https://ai.google.dev/gemini-api/docs#rest)
 
 3. Setup the client configuration
 ```bash
@@ -77,6 +73,7 @@ If you have Docker Compose installed, you can use it to run the application:
 ```
 
 Then set the `LANGUAGE_MODEL:API_KEY` with your PaLM API key or get one [here](https://ai.google.dev/gemini-api/docs/api-key)
+Set the `LANGUAGE_MODEL:URL` based on [REST example from the docs](https://ai.google.dev/gemini-api/docs#rest)
 
 2. Setup the client configuration
 ```bash
@@ -129,16 +126,12 @@ The application should now be running at `http://localhost:3000`.
 
 ## Built With
   - [ASP.NET Core 8](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-8?source=recommendations)
-  - [PaLM API](https://developers.googleblog.com/2023/03/announcing-palm-api-and-makersuite.html)
+  - [Gemini API](https://ai.google.dev)
   - [Next.js](https://nextjs.org/docs)
   - [TypeScript](https://www.typescriptlang.org/)
   - [TailwindCSS](https://tailwindcss.com)
   - [axios](https://axios-http.com/)
   - [React Markdown](https://github.com/remarkjs/react-markdown)
-
-## Contact
-
-Website: [riannegreiros.dev](https://riannegreiros.dev)
 
 ## License
 

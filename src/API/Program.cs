@@ -14,15 +14,14 @@ builder.Services.AddHealthChecksExtension(builder.Configuration);
 builder.Services.AddRateLimiter(options =>
 {
     options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
-
     options.AddPolicy("fixed", httpContext =>
-            RateLimitPartition.GetFixedWindowLimiter(
-                partitionKey: httpContext.Connection.RemoteIpAddress?.ToString(),
-                factory: partition => new FixedWindowRateLimiterOptions
-                {
-                    PermitLimit = 10,
-                    Window = TimeSpan.FromSeconds(10)
-                }));
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: httpContext.Connection.RemoteIpAddress?.ToString(),
+            factory: partition => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 10,
+                Window = TimeSpan.FromSeconds(10)
+            }));
 });
 
 var app = builder.Build();
@@ -42,39 +41,42 @@ app.MapPost("/prompt/{text}", async (
     IHttpClientFactory factory,
     HttpContext httpContext) =>
 {
-    var languageModelApiKey = app.Configuration["LANGUAGE_MODEL:API_KEY"];
-    var languageModelUrl = $"{app.Configuration["LANGUAGE_MODEL:URL"]}?key={languageModelApiKey}";
+    var apiKey = app.Configuration["LANGUAGE_MODEL:API_KEY"];
+    var geminiUrl = $"{app.Configuration["LANGUAGE_MODEL:URL"]}?key={apiKey}";
 
     var payload = new
     {
-        prompt = new { messages = new[] { new { content = text } } },
-        temperature = 0.1,
-        candidate_count = 1
+        contents = new[]
+        {
+            new { parts = new[] { new { text } } }
+        }
     };
 
     try
     {
         using var httpClient = factory.CreateClient();
         var content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
-        var response = await httpClient.PostAsync(languageModelUrl, content);
+        var response = await httpClient.PostAsync(geminiUrl, content);
         var data = await response.Content.ReadAsStringAsync();
 
-        app.Logger.LogInformation($"Response received from the API: {data}");
+        app.Logger.LogInformation($"Response received from Gemini API: {data}");
 
         await httpContext.Response.WriteAsync(data);
     }
     catch (Exception ex)
     {
-        app.Logger.LogError(ex, "An error occurred while contacting the API.");
+        app.Logger.LogError(ex, "An error occurred while contacting the Gemini API.");
+        httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+        await httpContext.Response.WriteAsync("Internal Server Error");
     }
 })
 .WithName("Generate Language Model Response")
 .WithSummary("Return a Language Model Response")
-.WithDescription("Return a Language Model Response from PaLM API")
+.WithDescription("Return a Language Model Response from Gemini API")
 .WithOpenApi(generatedOperation =>
 {
     var parameter = generatedOperation.Parameters[0];
-    parameter.Description = "The text to be processed by the language model";
+    parameter.Description = "The text to be processed by the Gemini language model";
     return generatedOperation;
 })
 .Produces(StatusCodes.Status200OK)

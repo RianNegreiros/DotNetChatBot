@@ -17,7 +17,7 @@ export default function Chat() {
     dismissError,
   } = useChat()
 
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -26,9 +26,9 @@ export default function Chat() {
 
   useEffect(() => {
     if (!isLoading) {
-      inputRef.current?.focus();
+      inputRef.current?.focus()
     }
-  }, [isLoading]);
+  }, [isLoading])
 
   return (
     <div className='p-6'>
