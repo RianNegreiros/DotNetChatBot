@@ -42,7 +42,7 @@ app.MapPost("/prompt/{text}", async (
     HttpContext httpContext) =>
 {
     var apiKey = app.Configuration["LANGUAGE_MODEL:API_KEY"];
-        var geminiUrl = $"{app.Configuration["LANGUAGE_MODEL:URL"]}?key={apiKey}";
+    var geminiUrl = $"{app.Configuration["LANGUAGE_MODEL:URL"]}?key={apiKey}";
 
     var payload = new
     {

@@ -44,7 +44,9 @@ export const useChat = () => {
         }[]
       } = response.data
 
-      const botMessage = data.candidates[0].content.parts.map((part) => part.text).join(' ')
+      const botMessage = data.candidates[0].content.parts
+        .map((part) => part.text)
+        .join(' ')
 
       setMessages((prevMessages) => {
         const newMessages = [
